@@ -1,0 +1,38 @@
+<%- include("../common/header", { title: "Add Product" }) %>
+<%- include("../common/navbar") %>
+<div class="container">
+
+    <h2>Edit Product</h2>
+
+    <form method="POST" action="/products/update/<%= product.id %>">
+
+        <div>
+            <label>Product Name:</label><br>
+            <input type="text" name="name" value="<%= product.name %>" required/>
+        </div>
+
+        <br>
+
+        <div>
+            <label>Category:</label><br>
+            <select name="category_id" required>
+                <% categories.forEach(cat => { %>
+                    <option 
+                        value="<%= cat.id %>"
+                        <%= cat.id === product.category_id ? "selected" : "" %>
+                    >
+                        <%= cat.name %>
+                    </option>
+                <% }) %>
+            </select>
+        </div>
+
+        <br>
+
+        <button type="submit">Update Product</button>
+    </form>
+
+    <br>
+
+    <a href="/products">Back to Product List</a>
+</div>

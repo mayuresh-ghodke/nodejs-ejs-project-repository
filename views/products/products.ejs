@@ -1,0 +1,78 @@
+<%- include("../common/header", { title: "Products" }) %>
+<%- include("../common/navbar") %>
+
+<div class="container">
+    <h2>Product Master</h2>
+    <form method="GET" action="/products" class="mb-3">
+        <label>Products per page:</label>
+        <select name="limit" onchange="this.form.submit()">
+            <option value="2"  <%= limit==2 ? "selected" : "" %>>2</option>
+            <option value="5"  <%= limit==5 ? "selected" : "" %>>5</option>
+            <option value="10" <%= limit==10 ? "selected" : "" %>>10</option>
+            <option value="20" <%= limit==20 ? "selected" : "" %>>20</option>
+        </select>
+    </form>
+
+    <hr>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Product Name</th>
+                <th>Category ID</th>
+                <th>Category Name</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% if (products.length === 0) { %>
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        No products found
+                    </td>
+                </tr>
+            <% } else { %>
+                <% products.forEach(product => { %>
+                    <tr>
+                        <td><%= product.productId %></td>
+                        <td><%= product.productName %></td>
+                        <td><%= product.categoryId %></td>
+                        <td><%= product.categoryName %></td>
+                        <td>
+                            <a href="/products/edit/<%= product.productId %>" class="btn btn-sm btn-warning">Edit</a>
+
+                            <form method="POST"
+                                action="/products/delete/<%= product.productId %>"
+                                class="d-inline">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            <% } %>
+        </tbody>
+    </table>
+    <nav class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item <%= page <= 1 ? 'disabled' : '' %>">
+                <a class="page-link" href="/products?page=<%= page - 1 %>&limit=<%= limit %>">
+                Prev
+                </a>
+            </li>
+            <% for(let i = 1; i <= totalPages; i++) { %>
+                <li class="page-item <%= page === i ? 'active' : '' %>">
+                    <a class="page-link" href="/products?page=<%= i %>&limit=<%= limit %>">
+                    <%= i %>
+                    </a>
+                </li>
+            <% } %>
+            <li class="page-item <%= page >= totalPages ? 'disabled' : '' %>">
+                <a class="page-link" href="/products?page=<%= page + 1 %>&limit=<%= limit %>">
+                Next
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

@@ -1,0 +1,13 @@
+<%- include("../common/header", { title: "Add Product" }) %>
+<%- include("../common/navbar") %>
+<div class="container">
+    <h2 class="text-center">Category Master - Add Category</h2>
+    <div class="d-flex justify-content-center align-items-center">
+        <form method="POST" action="/categories/add">
+            <label class="mt-3">Enter category name: </label>
+            <input type="text" name="name" class="form-control"
+            placeholder="Enter category name" required />
+            <button type="submit" class="btn btn-primary mt-3">Add Category</button>
+        </form>
+    </div>
+</div>
