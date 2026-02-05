@@ -31,3 +31,11 @@ A backend-focused web application built using **Node.js**, **Express**, **EJS**,
 - Git & GitHub
 - npm
 
+**Database Setup (MySQL)**
+1. Open MySQL Workbench or MySQL CLI
+2. Execute the SQL file provided in the project root.
+3. This script will: 
+- Create Database `nimaptestdb`
+- Create `categories` and `products` table
+- Insert sample records
+4. Update database credentials in `config/db.js`
